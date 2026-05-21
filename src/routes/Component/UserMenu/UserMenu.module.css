@@ -1,0 +1,13 @@
+.userMenuBox {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.userMenuText {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.19;
+  letter-spacing: 0.03em;
+}
