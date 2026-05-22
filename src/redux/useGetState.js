@@ -1,13 +1,22 @@
 import { useSelector } from 'react-redux';
-import { getContactsValue } from './contact/contactsSlice';
-import { getFilterValue } from './filter/filterSlice';
-import { getAuthLoginValue, getAuthIsLoggedInValue } from './auth/authSlice';
+import {
+  selectContacts,
+  selectLoading,
+  selectError,
+  selectFilter,
+  selectFilteredContacts,
+} from './selectors';
+
+import { getAuthLoginValue, getAuthIsLoggedInValue } from './authSlice';
 
 export const useGetState = () => {
   return {
-    contacts: useSelector(getContactsValue),
-    filter: useSelector(getFilterValue),
+    contacts: useSelector(selectContacts),
+    isLoading: useSelector(selectLoading),
+    error: useSelector(selectError),
+    filter: useSelector(selectFilter),
     login: useSelector(getAuthLoginValue),
     isLoggedIn: useSelector(getAuthIsLoggedInValue),
+    filteredContacts: useSelector(selectFilteredContacts),
   };
 };

@@ -1,8 +1,11 @@
-import initialContact from '@/contacts.json';
+// import initialContact from '@/contacts.json';
 
 export const initialState = {
   contacts: {
-    items: initialContact,
+    // items: initialContact,
+    items: [],
+    loading: false,
+    error: null,
   },
   filters: {
     name: '',

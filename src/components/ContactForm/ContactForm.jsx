@@ -1,9 +1,9 @@
 import { useId } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { nanoid } from 'nanoid';
 import { object, string } from 'yup';
 import { useDispatch } from 'react-redux';
-import { addContact } from '@/redux/contact/contactsSlice';
+import { useGetState } from '@/redux/useGetState';
+import { addContact } from '@/redux/contactsOps';
 import style from './ContactForm.module.css';
 
 const FeedbackSchema = object().shape({
@@ -16,22 +16,31 @@ const FeedbackSchema = object().shape({
 
 const initialValues = {
   name: '',
-  number: '',
+  phone: '',
 };
 
 const ContactForm = () => {
   const dispatch = useDispatch();
+  const { contacts, isLoading } = useGetState();
   const nameFieldId = useId();
   const numberFieldId = useId();
 
   const handleSubmit = (values, { resetForm }) => {
-    const contact = {
-      id: nanoid(),
+    const newContact = {
       name: values.name,
-      number: values.number,
+      phone: values.phone,
     };
 
-    dispatch(addContact(contact));
+    const isNamePresent = contacts.some(
+      contact => contact.name.toLowerCase() === newContact.name.toLowerCase(),
+    );
+
+    if (isNamePresent) {
+      alert(`"${newContact.name}" is already in contacts `);
+      return;
+    }
+
+    dispatch(addContact(newContact));
     resetForm();
   };
 
@@ -66,7 +75,7 @@ const ContactForm = () => {
           <Field
             className={style.field}
             type="phone"
-            name="number"
+            name="phone"
             id={numberFieldId}
           />
           <ErrorMessage
@@ -76,8 +85,8 @@ const ContactForm = () => {
           />
         </div>
 
-        <button className={style.formButton} type="submit">
-          Add
+        <button className={style.formButton} type="submit" disabled={isLoading}>
+          {isLoading && '☎'} Add
         </button>
       </Form>
     </Formik>

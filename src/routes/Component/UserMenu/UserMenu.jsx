@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useGetState } from '@/redux/useGetState';
-import { logOut } from '@/redux/auth/authSlice';
+import { logOut } from '@/redux/authSlice';
 import style from './UserMenu.module.css';
 
 const UserMenu = () => {

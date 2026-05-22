@@ -5,15 +5,13 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from '@/components/App/App';
-import { store, persistor } from '@/redux/store';
+import { store } from '@/redux/store';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <App />
-        </PersistGate>
+        <App />
       </Provider>
     </BrowserRouter>
   </StrictMode>,

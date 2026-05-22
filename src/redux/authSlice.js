@@ -1,9 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { initialState } from '@/redux/initialState';
-import { persistReducer } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
-// ставим дополнительно npm install localforage - для решения проблемы с localStorege
-import localforage from 'localforage';
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -21,13 +17,7 @@ export const authSlice = createSlice({
   },
 });
 
-const PersistConfig = {
-  key: 'auth',
-  // Вот так его используем
-  storage: localforage,
-};
-
-export const authReducer = persistReducer(PersistConfig, authSlice.reducer);
+export const authReducer = authSlice.reducer;
 
 export const { logIn, logOut } = authSlice.actions;
 

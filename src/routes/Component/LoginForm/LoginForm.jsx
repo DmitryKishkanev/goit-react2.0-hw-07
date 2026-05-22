@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logIn } from '@/redux/auth/authSlice';
+import { logIn } from '@/redux/authSlice';
 import style from './LoginForm.module.css';
 
 const LoginForm = () => {

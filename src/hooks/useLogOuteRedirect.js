@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useGetState } from '@/redux/useGetState';
 
 export const useLogOutRedirect = () => {
   const navigate = useNavigate();
-  const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+  const { isLoggedIn } = useGetState();
 
   useEffect(() => {
     if (!isLoggedIn) {

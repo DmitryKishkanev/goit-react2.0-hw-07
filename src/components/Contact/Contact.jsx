@@ -2,22 +2,16 @@ import { BiSolidUser } from 'react-icons/bi';
 import { BiSolidPhone } from 'react-icons/bi';
 import { useDispatch } from 'react-redux';
 import { useGetState } from '@/redux/useGetState';
-import { deleteContact } from '@/redux/contact/contactsSlice';
-
+import { deleteContact } from '@/redux/contactsOps';
 import style from './Contact.module.css';
 
 const Contact = () => {
-  const { contacts } = useGetState();
-  const { filter } = useGetState();
+  const { filteredContacts } = useGetState();
   const dispatch = useDispatch();
-
-  const visibleContacts = contacts.filter(contact =>
-    contact.name.toLowerCase().includes(filter.toLowerCase()),
-  );
 
   return (
     <>
-      {visibleContacts.map(({ id, name, number }) => (
+      {filteredContacts.map(({ id, name, phone }) => (
         <li className={style.contactItem} key={id}>
           <div className={style.contactBox}>
             <p className={style.contactContent}>
@@ -26,7 +20,7 @@ const Contact = () => {
             </p>
             <p className={style.contactContent}>
               <BiSolidPhone />
-              {number}
+              {phone}
             </p>
           </div>
 
