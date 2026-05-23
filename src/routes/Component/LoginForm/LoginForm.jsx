@@ -1,37 +1,64 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logIn } from '@/redux/authSlice';
+import { logIn } from '@/redux/contactsOps';
 import style from './LoginForm.module.css';
 
 const LoginForm = () => {
-  const [loginValue, setLoginValue] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
-    dispatch(logIn(loginValue));
-    e.currentTarget.reset();
-    navigate('/', { replace: true });
+    try {
+      // dispatch возвращает промис, а unwrap превращает его в обычный промис с payload
+      await dispatch(logIn({ email, password })).unwrap();
+
+      // если логин успешный, очищаем форму и переходим на главную
+      setEmail('');
+      setPassword('');
+      // Можно не делать если есть приватные и публичные роуты
+      navigate('/', { replace: true });
+    } catch (error) {
+      // если логин неуспешный, ловим ошибку
+      setErrorMessage(error.message || 'Login failed');
+    }
   };
 
   return (
     <div className={style.loginFormBox}>
       <h1 className={style.loginFormTitle}>Log In</h1>
       <form className={style.loginForm} onSubmit={handleSubmit}>
-        <input
-          className={style.loginFormField}
-          type="text"
-          name="login"
-          onChange={e => setLoginValue(e.target.value)}
-        />
+        <label className={style.loginFormLabel}>
+          Email
+          <input
+            className={style.loginFormField}
+            type="email"
+            name="email"
+            onChange={e => setEmail(e.target.value)}
+          />
+        </label>
+
+        <label className={style.loginFormLabel}>
+          Password
+          <input
+            className={style.loginFormField}
+            type="password"
+            name="password"
+            onChange={e => setPassword(e.target.value)}
+          />
+        </label>
+
+        {errorMessage && <p>{`${errorMessage} - try again`}</p>}
 
         <button
-          className={style.LoginFormButton}
+          className={style.loginFormButton}
           type="submit"
-          disabled={!loginValue.trim()}
+          disabled={!email || !password}
         >
           Log in
         </button>

@@ -5,9 +5,10 @@ import {
   selectError,
   selectFilter,
   selectFilteredContacts,
+  selectIsLoggedIn,
+  selectUserName,
+  selectIsRefreshing,
 } from './selectors';
-
-import { getAuthLoginValue, getAuthIsLoggedInValue } from './authSlice';
 
 export const useGetState = () => {
   return {
@@ -15,8 +16,9 @@ export const useGetState = () => {
     isLoading: useSelector(selectLoading),
     error: useSelector(selectError),
     filter: useSelector(selectFilter),
-    login: useSelector(getAuthLoginValue),
-    isLoggedIn: useSelector(getAuthIsLoggedInValue),
     filteredContacts: useSelector(selectFilteredContacts),
+    userName: useSelector(selectUserName),
+    isLoggedIn: useSelector(selectIsLoggedIn),
+    isRefreshing: useSelector(selectIsRefreshing),
   };
 };

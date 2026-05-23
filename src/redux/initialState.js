@@ -7,11 +7,15 @@ export const initialState = {
     loading: false,
     error: null,
   },
+
   filters: {
     name: '',
   },
+
   auth: {
-    login: '',
-    isLoggedIn: false,
+    user: { name: null, email: null },
+    token: null,
+    isLoggedIn: !!localStorage.getItem('token'),
+    isRefreshing: false,
   },
 };

@@ -8,7 +8,7 @@ import style from './ContactForm.module.css';
 
 const FeedbackSchema = object().shape({
   name: string().min(3, 'Too Short!').max(50, 'Too Lonf!').required('Required'),
-  number: string()
+  phone: string()
     .min(3, 'Too Short!')
     .max(50, 'Too Lonf!')
     .required('Required'),
@@ -74,13 +74,13 @@ const ContactForm = () => {
           </label>
           <Field
             className={style.field}
-            type="phone"
+            type="tel"
             name="phone"
             id={numberFieldId}
           />
           <ErrorMessage
             className={style.errorMessage}
-            name="number"
+            name="phone"
             component="span"
           />
         </div>

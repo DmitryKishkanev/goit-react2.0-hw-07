@@ -36,10 +36,10 @@
 
   &:hover,
   &:focus {
-    transform: scale(1.01);
+    transform: scale(1.07);
   }
 }
 
 .link {
-  color: rgb(33, 150, 243);
+  color: var(--primary-background-color);
 }

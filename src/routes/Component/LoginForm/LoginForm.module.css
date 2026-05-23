@@ -25,6 +25,13 @@
   justify-content: center;
 }
 
+.loginFormLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 18px;
+}
+
 .loginFormField {
   padding: 4px;
   border-radius: 4px;
@@ -41,13 +48,6 @@
   }
 }
 
-.LoginFormButton {
+.loginFormButton {
   margin-left: auto;
 }
-
-/* .active {
-  border-color: rgb(223, 186, 1);
-  color: rgb(223, 186, 1);
-  outline: none;
-  box-shadow: none;
-} */

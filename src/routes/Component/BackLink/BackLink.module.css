@@ -17,6 +17,6 @@
   &:hover,
   &:focus {
     transform: scale(1.09);
-    color: rgb(33, 150, 243);
+    color: var(--primary-background-color);
   }
 }
