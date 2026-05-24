@@ -1,17 +1,17 @@
-.appBarContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
 .header {
   display: flex;
   width: 100%;
   /* align-items: center; */
   justify-content: space-between;
-  padding: 10px 6px;
+  padding: 10px 20px;
   /* margin-bottom: 30px; */
   border-bottom: 1px solid black;
+}
+
+.appBarContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .headerTitle {

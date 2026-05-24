@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RegisterForm from '@/routes/Component/RegisterForm';
 import style from './RegisterPage.module.css';
@@ -6,28 +6,28 @@ import style from './RegisterPage.module.css';
 const RegisterPage = () => {
   const navigate = useNavigate();
 
-  const handleKeyDown = event => {
-    if (event.code === 'Escape') {
-      navigate('/', { replace: true });
-    }
-  };
-
   const handleBackdropClick = event => {
     if (event.currentTarget === event.target) {
       navigate('/', { replace: true });
     }
   };
 
+  // оборачиваем handleKeyDown в useCallback(), что бы ниже в useEffect можно было handleKeyDown спокойно поставить в зависимости, что бы эффект постоянно не отписывал/подписывал слушатель заново
+  const handleKeyDown = useCallback(
+    event => {
+      if (event.code === 'Escape') {
+        navigate('/', { replace: true });
+      }
+    },
+    [navigate],
+  );
+
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-    // Не ставим handleKeyDown в зависимости useEffect,
-    // потому что функция пересоздаётся на каждом рендере,
-    // и эффект будет постоянно отписывать/подписывать слушатель заново.
-    // Нам нужен один слушатель при монтировании, поэтому оставляем [].
-  }, []);
+  }, [handleKeyDown]);
 
   return (
     <div className={style.registerPageContainer} onClick={handleBackdropClick}>

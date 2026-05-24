@@ -20,9 +20,12 @@ const PhonebookDetails = () => {
 
   return (
     <main className={style.main}>
-      {/* строчка для ESLint, что бы он не ругался на backLinkRef.current*/}
-      {/* eslint-disable-next-line */}
-      <BackLink to={backLinkRef.current}>Go back</BackLink>
+      <div className={style.backLinkBox}>
+        {/* строчка для ESLint, что бы он не ругался на backLinkRef.current*/}
+        {/* eslint-disable-next-line */}
+        <BackLink to={backLinkRef.current}>Go back</BackLink>
+      </div>
+
       <div className={style.phonebooDetailsContainer}>
         <Phonebook />
 
