@@ -22,23 +22,23 @@ export default function App() {
     dispatch(refreshCurrentUser());
   }, [dispatch]);
 
-  return (
-    !isRefreshing && (
-      <div className={style.app}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="register" element={<RegisterPage />} />
+  return !isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <div className={style.app}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
 
-            <Route path="phonebook" element={<PhonebookDetails />}>
-              <Route path="description" element={<Description />} />
-            </Route>
-
-            <Route path="*" element={<NotFoundPage />} />
+          <Route path="phonebook" element={<PhonebookDetails />}>
+            <Route path="description" element={<Description />} />
           </Route>
-        </Routes>
-      </div>
-    )
+
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+    </div>
   );
 }
